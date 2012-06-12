@@ -1,0 +1,427 @@
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    background: none repeat scroll 0 0 transparent;
+    border: 0 none;
+    font-size: 100%;
+    margin: 0;
+    outline: 0 none;
+    padding: 0;
+    vertical-align: baseline;
+}
+ol, ul {
+    list-style: none outside none;
+}
+body{
+    background: none repeat scroll 0 0 #D1D0CA;
+    line-height: 1.4;
+    height: 100%;
+    
+}
+
+header{
+    background-color: #9C9C9C;
+    border-bottom: 2px solid #D2D2D2;
+    box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.25);
+   /*  background: none repeat scroll 0 0 #201500;
+   background: url("../images/header_bg.jpg") repeat-x scroll left top #FFC649;*/
+display: block;
+height: 46px;
+
+
+
+width:100%;
+}
+aside#rightbar,div#right_side,ul#sidebar-list{
+   background-color: #3C3C3C; 
+    background-color: #FFF; 
+}
+
+
+aside#rightbar{
+
+
+bottom: 0;
+left: 0;
+position: fixed;
+top: 46px;
+width: 305px;
+margin-left:10px;
+}
+div#right_side {
+/*background-color:yellow;*/
+   /* background: url("../images/shadow-x.png") repeat-y scroll left top #3C3C3C;*/
+    bottom: 0;
+    display: block;
+    left: 310px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    right: 0;
+    top: 46px;
+}
+div#side_ul_con {
+	background: url("../images/shadow-y.png") repeat-x scroll left top transparent;
+    content: "";
+    bottom: 0;
+    overflow-y:scroll;
+	overflow-x:hidden;
+    position: fixed;
+    top: 46px;
+    width: 300px;
+}
+aside#side_ul_con li {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+   
+}
+ul#sidebar-list {
+   
+    min-height: 68px;
+    overflow: hidden;
+    position: relative;
+    top: 0;
+   
+}
+li.sidebar-list-item {
+    height: 92px;
+	 border-bottom: 1px solid #D2D2D2;
+            cursor: pointer;
+}
+
+li.sidebar-list-item img {
+    background: url("../images/movie.none.tmb.gif") no-repeat scroll left top transparent;
+    border: 1px solid #D2D2D2;
+    float: left;
+    height: 81px;
+    margin: 4px;
+    width: 54px;
+}
+li.sidebar-list-item h3 , .main_inside h1,div#content_main h2 {
+    color:#757B7F;
+}
+
+li.sidebar-list-heading {
+    background: url("../images/subtitle-sidenav.png") repeat-x scroll left top #FFF;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    height: 12px;
+    padding: 4px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.65);
+}
+
+#content_main section:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+
+div#content_main {
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 660px;
+}
+.main_inside{
+padding: 20px;
+    position: absolute;
+    top: 0;
+    width: 620px;
+}
+div#content_main h1 {
+    font-size: 24px;
+    font-weight: 900;
+    padding-bottom: 16px;
+}
+section.metadata {
+    display: block;
+    float: left;
+}
+
+#content_main section {
+    clear: both;
+    margin-bottom: 16px;
+    width:100%;
+}
+div.poster-area {
+    background: url("../images/postershadow.png") no-repeat scroll center bottom transparent;
+    display: block;
+    float: left;
+    left: -9px;
+    margin-right: 11px;
+    padding: 0 9px 6px;
+    position: relative;
+}
+div.main_inside img.poster{
+max-width: 150px;
+width: 150px;
+background-image: url('/images/movie.none.det.gif');
+-webkit-box-reflect: below 0 -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.75, transparent), to(rgba(255,255,255,0.25)))
+}
+div.main_inside .summary {
+    clear: none;
+    overflow: hidden;
+}
+div.movie-scores {
+    /*border: 1px solid #C0C0C0;*/
+}
+div.movie-scores > div:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+div.movie-scores .viewer {
+    float: left;
+    width: 100px;
+}
+div.movie-scores .meter:after {
+    content: "%";
+    padding-right: 48px;
+}
+div.movie-scores .tomato-fresh:before {
+    background-position: 0 0;
+}
+div.movie-scores span.rating-count {
+    color: #606060;
+    float: left;
+    font-size: 14px;
+    font-weight: normal;
+}
+div.movie-scores .meter:after {
+    content: "%";
+    padding-right: 48px;
+}
+div.main_inside div.actions:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+div.main_inside div.actions {
+    margin: 12px auto;
+}
+div.main_inside div.actions div.action-button:first-of-type {
+    float: left;
+}
+
+
+div.main_inside div.actions a.trailer-icon:before {
+    background: url("../images/trailer.png") no-repeat scroll left center transparent;
+}
+
+div.main_inside div.actions a:before {
+    content: "";
+    display: block;
+    float: left;
+    height: 29px;
+    margin: 4px 12px;
+    vertical-align: middle;
+    width: 29px;
+}
+
+div.main_inside div.actions div.action-button a {
+    line-height: 37px;
+}
+div.main_inside div.actions a.showtimes-icon:before {
+    background: url("../images/showtimes.png") no-repeat scroll left center transparent;
+}
+div.main_inside ul.movie-info {
+    clear: both;
+    color: #606060;
+    line-height: 130%;
+    padding-bottom: 12px;
+} 
+div.main_inside p.synopsis {
+   line-height: 150%;
+}
+div#content_main .button {
+    border: 1px solid #C0C0C0;
+    color: black;
+    display: inline-block;
+    line-height: 100%;
+    margin: 4px 0;
+    padding: 3px 12px;
+    text-decoration: none;
+}
+div.main_inside div.actions {
+    margin: 12px auto;
+}
+div.actions div.action-button {
+    border: 1px solid #B8B8B8;
+    color: #313131;
+    font-weight: bold;
+    height: 37px;
+    margin: auto 0;
+	float: left;
+   width:48%;
+}
+#content_main .box:after {
+    clear: both;
+    content: "";
+    display: block;
+}
+#content_main .box {
+    -moz-border-bottom-colors: none;
+    -moz-border-image: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background-color: #CCCBC5;
+    border-color: #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+    border-style: solid;
+    border-width: 0 1px 1px;
+    clear: both;
+    padding: 10px;
+}
+section.pictures div.box {
+    overflow: hidden;
+}
+section.pictures div.photo-overview {
+    color: #606060;
+    font-size: 12px;
+    margin-bottom: 8px;
+    text-align: right;
+}
+section.pictures div.photo-container {
+    width: 100%;
+}
+section.pictures div.photo-container a.slideLeft:after {
+    background-position: center bottom;
+}
+section.pictures div.photo-container a.slider:after {
+    background: url("../images/triangles.png") no-repeat scroll center center transparent;
+    content: "";
+    display: block;
+    height: 27px;
+    width: 10px;
+}
+section.pictures div.photo-container a.slider {
+    background-color: #E9E9E9;
+    display: block;
+    height: 27px;
+    opacity: 0.4;
+    padding: 26px 4px 27px;
+    width: 10px;
+}
+section.pictures div.photo-container a.slideLeft {
+    float: left;
+}
+section.pictures div.photo-carousel {
+    display: inline-block;
+    margin: 0 auto;
+    overflow: hidden;
+    width: 558px;
+}
+div.photo-carousel div.photo-slider {
+    overflow: hidden;
+    position: relative;
+    width: 99999px;
+}
+section.pictures img.thumbnail {
+    border: 0 solid #D2D2D2;
+    display: block;
+    float: left;
+    height: 80px;
+    padding: 0 4px;
+    width: 80px;
+}
+section.pictures div.photo-container a.slideRight:after {
+    background-position: center top;
+}
+section.pictures div.photo-container a.slider:after {
+    background: url("../images/triangles.png") no-repeat scroll center center transparent;
+    content: "";
+    display: block;
+    height: 27px;
+    width: 10px;
+}
+div#content_main h2 {
+  
+    font-size: 18px;
+    font-weight: 900;
+    margin-top: 22px;
+    padding-bottom: 14px;
+}
+img.person-thumbnail {
+    border: 1px solid #A1A1A1;
+    height: 50px;
+    width: 50px;
+    float:left;
+}
+div#extra {
+  /*  background: url("../images/shadow-x.png") repeat-y scroll left top #FFF;
+    bottom: 0;
+    left: 960px;
+    overflow: hidden;
+    position: fixed;
+    right: 16px;
+    top: 46px;
+    z-index: 65534;*/
+   position: absolute;
+  
+}
+div.role {
+    height: 52px;
+}
+
+.clear{
+    
+    clear: both;
+}
+.pointer{
+    
+    cursor:pointer;
+}
+
+
+/*histogram rating */
+
+
+
+.top-row {
+    padding-bottom: 2px;
+}
+.histogram-msg {
+    padding-right: 5px;
+    text-align: right;
+    text-transform: lowercase;
+    white-space: nowrap;
+    width: 80px;
+}
+.histogram-clear-filter .histogram-msg {
+    text-transform: none;
+}
+.histogram-label {
+    color: #3377AB;
+    cursor: pointer;
+}
+.histogram-label:hover {
+    text-decoration: underline;
+}
+.histogram-clear-filter {
+    padding-top: 5px;
+}
+.bar-cell {
+    border-left: 1px solid #666666;
+    white-space: nowrap;
+    width: 225px;
+}
+.bar {
+    float: left;
+}
+.bar1 {
+    background-color: #FF6F31;
+}
+.bar2 {
+    background-color: #FF9F02;
+}
+.bar3 {
+    background-color: #FFCF02;
+}
+.bar4 {
+    background-color: #A4CC02;
+}
+.bar5 {
+    background-color: #88B131;
+}

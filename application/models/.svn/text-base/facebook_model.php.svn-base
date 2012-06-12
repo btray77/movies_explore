@@ -1,0 +1,61 @@
+<?php
+class Facebook_model extends CI_Model {
+       
+    
+	public function __construct()
+	{
+		parent::__construct();
+		
+                 $userInfos='';	
+                
+		$config = array(
+						'appId'  => '298194790245617',
+						'secret' => '49d89431b24592f0dd40ea0d4ad3eecb',
+						'fileUpload' => true, // Indicates if the CURL based @ syntax for file uploads is enabled.
+						);
+		
+		$this->load->library('Facebook', $config);
+		
+		$user = $this->facebook->getUser();
+
+		// We may or may not have this data based on whether the user is logged in.
+		//
+		// If we have a $user id here, it means we know the user is logged into
+		// Facebook, but we don't know if the access token is valid. An access
+		// token is invalid if the user logged out of Facebook.
+		$profile = null;
+		if($user)
+		{
+			
+			$userInfos           = $this->facebook->api('/'.$user);
+			
+			
+			try {
+			    // Proceed knowing you have a logged in user who's authenticated.
+				$profile = $this->facebook->api('/me?fields=id,name,link,email');
+				$fql    =   "select name, location, sex, pic_square from user where uid=" . $user;
+            $param  =   array(
+                'method'    => 'fql.query',
+                'query'     => $fql,
+                'callback'  => ''
+            );
+            //$fqlResult   =   $this->facebook->api($param);
+			} catch (FacebookApiException $e) {
+				error_log($e);
+			    $user = null;
+			}		
+		}
+		//$userInfo           = $facebook->api("/$user");
+		$fb_data = array(
+						'me' => $profile,
+						'uid' => $user,
+						'userinfos'=> $userInfos,
+						//'userinfo'=> $fqlResult,
+						'loginUrl' => $this->facebook->getLoginUrl(),
+						'logoutUrl' => $this->facebook->getLogoutUrl(),
+					);
+					echo "<pre>";
+//print_r($fb_data);
+		$this->session->set_userdata('fb_data', $fb_data);
+	}
+}
