@@ -157,6 +157,9 @@ var urll='<?php echo site_url("movie/get_all_actors");?>';
         
     }   
  
+    function show_review_add(){
+        $('#write_review_div').show('slow');
         
+    }   
         
 </script>

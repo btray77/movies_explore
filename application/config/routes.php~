@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "onehome";
+$route['default_controller'] = "review";
 $route['404_override'] = '';
 
 

@@ -36,10 +36,36 @@ foreach($result->result_array() as $row){
   	
   	<span class="blurb"><?php echo substr_replace($movie_desc, '...', 300); ?></span>
   	<span class="full" style="display:none;"><?php echo $movie_desc; ?></span>
-  	<br><a href="#" class="button" id="desc_more">More...</a>
+  	<br><a href="#" class="button org_button" id="desc_more">More...</a>
   </p>
   </div>
 </section>
+                
+                
+          
+    	<div class="list_carousel"><a id="prev3" class="prev" href="#">&lt;</a>
+				<ul id="foo3">
+					<li style="width: 50px; height: 50px;">c</li>
+					<li style="width: 200px; height: 100px;">a</li>
+					<li style="width: 50px; height: 150px;">r</li>
+					<li style="width: 50px; height: 200px;">o</li>
+					<li style="width: 50px; height: 150px;">u</li>
+					<li style="width: 100px; height: 100px;">F</li>
+					<li style="width: 250px; height: 50px;">r</li>
+					<li style="width: 150px; height: 100px;">e</li>
+					<li style="width: 150px; height: 150px;">d</li>
+					<li style="width: 50px; height: 200px;">S</li>
+					<li style="width: 100px; height: 150px;">e</li>
+					<li style="width: 150px; height: 100px;">l</li>
+					<li style="width: 200px; height: 50px;"> </li>
+				</ul>
+                                    <a id="next3" class="next" href="#">&gt;</a>
+				<div class="clearfix"></div>
+				
+				
+			</div>
+
+			
                 <!--
 <section class="pictures">
 <div component="PhotoBrowser" class="box" id="">
@@ -201,11 +227,12 @@ foreach($result->result_array() as $row){
       
       
      <?php foreach($directors_array->result_array() as $row){?> 
-    <li onclick="actor_click(this,<?php echo $row['actor_id']; ?>)" class="box clickable" component="PageLink">
+    <a href="<?php echo site_url('actor?a_id='.$row['actor_id']); ?>"><li class="box clickable" component="PageLink">
       
-        <img src="<?php echo (($row['actor_photo'])) ? $row['actor_photo'] : base_url().'images/cast_thumb.gif';?>" class="thumbnail person-thumbnail" />
+    <?php $img_url= base_url().'images/thumb.php?path='.$row["actor_photo"].'&width=50$height=50';?>
+        <img src="<?php echo $img_url;?>" class="thumbnail person-thumbnail" />
       <div class="role"><span class="person-name"><?php echo $row['actor_name'];?></span></div>
-    </li>
+    </li></a>
       <?php } ?>
     
   </ul>
@@ -227,7 +254,7 @@ foreach($result->result_array() as $row){
     
   <a href="<?php echo site_url('actor?a_id='.$row['actor_id']);?>">
     <li  class="box clickable hidden" component="PageLink">
-      <img alt="<?php echo $row['actor_name']?>" src="<?php echo $row['actor_photo']?>" class="thumbnail person-thumbnail">
+      <img alt="<?php echo $row['actor_name']?>" src="<?php echo base_url(); ?>js/timthumb.php?src=<?php echo $row['actor_photo']?>&w=50&h=50&zc=0" class="thumbnail person-thumbnail">
       <div class="role">
 	      <span class="person-name"><?php echo $row['actor_name']?></span>
 	     

@@ -48,7 +48,10 @@ body{
         background: url("../images/upper-fog.png") no-repeat scroll 50% 0 #2D3038;
         color: #C0C1C5;
     font-family: "proxima-nova-1","proxima-nova-2","Helvetica Neue",Helvetica,Arial,sans-serif;
-    
+    font-family: "Droid Sans",Arial,sans-serif;
+}
+.right{
+    float:right;
 }
 
 header{
@@ -324,8 +327,9 @@ div#content_main .button {
     display: inline-block;
     line-height: 100%;
     margin: 4px 0;
-    padding: 3px 12px;
+    padding: 2px 14px;
     text-decoration: none;
+    font-size: small;
 }
 div.main_inside div.actions {
     margin: 12px auto;
@@ -354,7 +358,7 @@ div.actions div.action-button {
     font-size: 11px;
   /*  margin: 0 0 24px;*/
     overflow: hidden;
-    padding: 12px 15px 1px;
+    padding: 12px 15px 5px;
     
      border-bottom: 1px solid #1F2229;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.05) inset;    
@@ -396,8 +400,8 @@ section.pictures div.photo-carousel {
     display: inline-block;
     margin: 0 auto;
     overflow: hidden;
-    width: 558px;
-    margin-left: 26px;
+   /*  width: 600px;
+   margin-left: 26px;*/
 }
 div.photo-carousel div.photo-slider {
     overflow: hidden;
@@ -590,17 +594,13 @@ div.role span{
 	float: none;
 	clear: both;
 }
-.wrapper {
-				background-color: white;
-				width: 480px;
-				margin: 40px auto;
-				padding: 50px;
-				box-shadow: 0 0 5px #999;
-			}
+
 			.list_carousel {
 				/*background-color: #ccc;
 				margin: 0 0 30px 60px;
 				width: 360px;*/
+                                 float:left;
+                                 margin-left:10px;
 			}
 			.list_carousel ul {
 				margin: 0;
@@ -632,11 +632,11 @@ div.role span{
 			}
 			.prev {
 				float: left;
-				margin-left: 10px;
+				margin-left: 0px;
 			}
 			.next {
-				float: right;
-				margin-right: 10px;
+				float: left;
+				margin-right: 0px;
 			}
 			.pager {
 				float: left;
@@ -657,21 +657,23 @@ div.role span{
 			}
          a.prev {
 	background: url(../images/left_arrow.png) no-repeat transparent;
-	width: 45px;
+	width: 35px;
 	height: 50px;
+        margin-top:12px;
 	display: block;
-	position: absolute;
+	/*position: absolute;
 	top: 550px;
-         margin-left: 45px;
+         margin-left: 45px;*/
 }
  a.next {
 	background: url(../images/right_arrow.png) no-repeat transparent;
-	width: 45px;
+	width: 35px;
 	height: 50px;
 	display: block;
-	position: absolute;
+        margin-top:12px;
+	/*position: absolute;
 	top: 550px;
-        margin-right: 55px;
+        margin-right: 55px;*/
 }
 a.prev {			left: -22px;
 					 }
@@ -705,3 +707,71 @@ a.prev span, a.next span {
 .pagination a span {
 	display: none;
 }
+
+
+.write_review_div textarea,.write_review_div .form-text-box {
+    background: none repeat scroll 0 0 #2C2E35;
+    border: 1px solid rgba(0, 0, 0, 0.698);
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset;
+    color: white;
+    font-family: "proxima-nova-1","proxima-nova-2","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    margin: 0 6px 0 0;
+    outline: 0 none;
+    padding: 4px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    width: 95%;
+}
+.write_review_div label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 18px;
+    padding-left: 12px;
+    padding-top: 9px;
+    position: absolute;
+}
+.write_review_div textarea:focus,.write_review_div .form-text-box:focus{
+    background: none repeat scroll 0 0 #404F58;
+    border-color: #6DBCFF;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3) inset, 0 0 4px rgba(71, 197, 255, 0.5);
+}
+.write-review-field-name {
+    margin-right: 8px;
+}
+.write-review-content {
+    
+    clear: both;
+    padding: 8px 5px 0 8px;
+}
+.write-review-star {
+    cursor: pointer;
+}
+.write-review-field-name {
+    margin-right: 8px;
+}
+.write-review-section {
+    margin-bottom: 8px;
+}
+.goog-inline-block {
+    display: inline-block;
+    position: relative;
+}
+.star {
+    background-color: transparent;
+    padding-left: 3px;
+}
+.SPRITE_star_off_dark {
+    background: url("../images/4181059851-sprites.png") no-repeat scroll 0 0 transparent;
+    height: 10px;
+    width: 11px;
+}
+.form-text-box {
+    border: 1px solid #CCCCCC;
+    padding: 2px 6px;
+}
+.write-review-remaining {
+    font-size: 80%;
+    margin-left: 5px;
+}
+
+    

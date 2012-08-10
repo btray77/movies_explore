@@ -43,7 +43,7 @@ foreach($result->result_array() as $row){
                 
                 
           
-    	<div class="list_carousel">
+    	<div class="list_carousel"><a id="prev3" class="prev" href="#">&lt;</a>
 				<ul id="foo3">
 					<li style="width: 50px; height: 50px;">c</li>
 					<li style="width: 200px; height: 100px;">a</li>
@@ -59,9 +59,10 @@ foreach($result->result_array() as $row){
 					<li style="width: 150px; height: 100px;">l</li>
 					<li style="width: 200px; height: 50px;"> </li>
 				</ul>
+                                    <a id="next3" class="next" href="#">&gt;</a>
 				<div class="clearfix"></div>
-				<a id="prev3" class="prev" href="#">&lt;</a>
-				<a id="next3" class="next" href="#">&gt;</a>
+				
+				
 			</div>
 
 			
@@ -228,7 +229,7 @@ foreach($result->result_array() as $row){
      <?php foreach($directors_array->result_array() as $row){?> 
     <a href="<?php echo site_url('actor?a_id='.$row['actor_id']); ?>"><li class="box clickable" component="PageLink">
       
-    <?php $img_url= base_url().'images/thumb.php?path='.$row["actor_photo"].'&width=50$height=50';?>
+    <?php $img_url= base_url().'js/timthumb.php?src='.$row["actor_photo"].'&w=50&h=50&zc=0';?>
         <img src="<?php echo $img_url;?>" class="thumbnail person-thumbnail" />
       <div class="role"><span class="person-name"><?php echo $row['actor_name'];?></span></div>
     </li></a>
@@ -253,7 +254,7 @@ foreach($result->result_array() as $row){
     
   <a href="<?php echo site_url('actor?a_id='.$row['actor_id']);?>">
     <li  class="box clickable hidden" component="PageLink">
-      <img alt="<?php echo $row['actor_name']?>" src="<?php echo $row['actor_photo']?>" class="thumbnail person-thumbnail">
+      <img alt="<?php echo $row['actor_name']?>" src="<?php echo base_url(); ?>js/timthumb.php?src=<?php echo $row['actor_photo']?>&w=50&h=50&zc=0" class="thumbnail person-thumbnail">
       <div class="role">
 	      <span class="person-name"><?php echo $row['actor_name']?></span>
 	     

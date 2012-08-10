@@ -23,13 +23,15 @@ class Movie_model extends CI_Model {
 	function get_movies(){//return the facebook user id
 		 $this->db->select('*');
                  $this->db->from('movies');
-                 $this->db->order_by('movie_date','desc');
+                 $this->db->where('movie_status','0');
+                 $this->db->order_by('movie_date','asc');
                  return $this->db->get();
         }
            function get_movie_details($m_id){//return the facebook user id
                
 		 $this->db->select('*');
                  $this->db->from('movies');
+                 
                  if($m_id)
                  $this->db->where('movie_id',$m_id);
                  else {
@@ -41,6 +43,7 @@ class Movie_model extends CI_Model {
          function get_actors_details($m_id,$limit){
                 $this->db->select('*');
                 $this->db->from('actors');
+		 $this->db->where('actor_status','0');
                 if($limit)
                 $this->db->limit($limit);
                 $this->db->where('`actor_id` IN (SELECT `actor_id` FROM `movies_actors` where `movie_id`='.$m_id.')', NULL, FALSE);
@@ -50,6 +53,7 @@ class Movie_model extends CI_Model {
           function get_directors_details($m_id){
                 $this->db->select('*');
                 $this->db->from('actors');
+		 $this->db->where('actor_status','0');
                 $this->db->where('`actor_id` IN (SELECT `movie_director` FROM `movies` where `movie_id`='.$m_id.')', NULL, FALSE);
                 
                  return $this->db->get();
@@ -88,13 +92,16 @@ class Movie_model extends CI_Model {
          
          $this->db->select('m.*');
          $this->db->from('movies_actors ma');
+         
          $this->db->join('movies as m','m.movie_id=ma.movie_id');
+         $this->db->where('m.movie_status','0');
          $this->db->where('ma.actor_id',$a_id);
            return $this->db->get();
      }
      function get_movies_by_dire($d_id){
          $this->db->select('*');
          $this->db->from('movies');
+         $this->db->where('movie_status','0');
          $this->db->where('movie_director',$d_id);
             return $this->db->get();
      }

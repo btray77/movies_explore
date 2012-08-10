@@ -25,8 +25,10 @@ class Movie extends CI_Controller {
 	}
 	public function index()
 	{
-                $data['movie_id']=$this->input->get('m_id');
-                  
+                $data['movie_id']=($this->input->get('m_id')) ? $this->input->get('m_id') : '178';
+
+			
+                   $data['type']='movie';
                 $key=$data['movie_id'];
              $data['cast_array']=$this->movie_model->get_actors_details($key,'3');
              $data['directors_array']=$this->movie_model->get_directors_details($key);

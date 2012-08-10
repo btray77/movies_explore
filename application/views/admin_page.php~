@@ -2,122 +2,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.min.js"></script>
 <title></title>
 </head>
 <body>
-<?php include_once(APPPATH.'simple_html_dom.php'); ?>
+ <?php
+  include_once(APPPATH . 'js/admin.php'); 
+  
+?>  
 <div class="wrapper">
 
-<?php   test(); 
-
- # this is the global array we fill with article information
-    $articles = array();
-	 $filim_name = array();
-	$image = array();
-	$story = array();
-    # passing in the first page to parse, it will crawl to the end
-    # on its own
-    getArticles('http://en.wikipedia.org/wiki/Malayalam_films_of_2012');
-
-function getArticles($page) {
-    global $articles, $descriptions,$image,$filim_name,$stories;
-    
-    $htm = new simple_html_dom();
-    $htm->load_file($page);
-
-	foreach($htm->find('i') as $td) 
-       {
-		
-				        
-
-	      foreach($td->find('a') as $m_link) {
-			
-			$articles[] = array('http://en.wikipedia.org'.$m_link->href
-				
-				);
-		
-
-	}
-       }
-
-
-
-
-
+<ul id="sidebar-list">
+            
+           <!-- <li class="sidebar-list-heading" >
+                
+            </li>-->
+           <?php foreach($result->result_array() as $row){?> 
+           <li class="sidebar-list-item" id="list_aside<?php echo $row['movie_id'];?>">
+		<img src="<?php echo base_url(); ?>js/timthumb.php?src=<?php echo $row['movie_photo'];?>&w=54&h=81"  />
+                <input type="text" value="<?php echo $row['movie_photo'];?>" id="tb_movie_photo"/>
+               
+                
+		<h3><?php echo $row['movie_name'];?></h3>
+		<p>caste,caste,caste</p>
+                <input type="button" onclick="delete_movie(<?php  echo $row['movie_id']; ?>)" id="<?php echo 'trash_button'.$row['movie_id'];?>" value="<?php echo ($row['movie_status']==1) ? 'InActive' : 'Active'; ?>"/>
+		 <input type="button" onclick="update_movie(<?php  echo $row['movie_id']; ?>)" id="<?php echo 'bt_movie_update'.$row['movie_id'];?>" value="update photo"/>
+	</li>
+           <hr></hr>
+	<?php } ?>
+	</ul>
     
     
-
-
-		
-	
     
-
-	
-
-    # lets see if there's a next page
-  /*  if($next = $html->find('a[class=nextpostslink]', 0)) {
-        $URL = $next->href;
-        echo "going on to $URL <<<\n";
-        # memory leak clean up
-        $html->clear();
-        unset($html);
-        
-        getArticles($URL);
-    }*/
-}
-
-
-
-
-
-function get_movie($page) {
-echo $page;
-global $article, $descriptions,$image,$filim_name,$stories;
     
-    $html = new simple_html_dom();
-    $html->load_file($page);
-    
-    $items = $html->find('div[id=mw-content-text]');  
-   //$items=$items->children(0);
-    foreach($items as $post) {
-	foreach($post->find('img') as $img){
-			$image[]=$img->src;
-			}
-	
-       $article[] = array($post->children(0)->first_child()->innertext,
-				$image['0']
-				);
-				                           
-		
-    }
-}
-
-
-
-echo '<pre>';
-
-//print_r($filim_name[0]);
-
-print_r($articles[3][0]);
-echo '</pre>';
-get_movie($articles[3][0]);
-
-
-
-
-$article=$article[0];
-
-print_r($article[0]);
-
-
-
-
-
-
-
- ?>
-
-admin page
 </div>
 
 
