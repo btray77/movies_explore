@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= ' http://192.168.0.144/review/';
+$config['base_url']	= 'http://' . $_SERVER['HTTP_HOST'] . '/review/';
 
 /*
 |--------------------------------------------------------------------------

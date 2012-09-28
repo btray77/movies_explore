@@ -24,9 +24,21 @@ class Movie_model extends CI_Model {
 		 $this->db->select('*');
                  $this->db->from('movies');
                  $this->db->where('movie_status','0');
-                 $this->db->order_by('movie_date','desc');
+                 $this->db->order_by('movie_date','asc');
                  return $this->db->get();
         }
+        
+     function get_movies_count(){
+     					$this->db->select('count(movie_id) as count');
+                 $this->db->from('movies');
+                 $this->db->where('movie_status','0');
+                
+                 $query=$this->db->get();
+                foreach($query->result_array() as $row)
+                return $row['count'];
+     	
+     	}   
+        
            function get_movie_details($m_id){//return the facebook user id
                
 		 $this->db->select('*');
@@ -105,5 +117,82 @@ class Movie_model extends CI_Model {
          $this->db->where('movie_director',$d_id);
             return $this->db->get();
      }
+function get_movie_photo_gallery($m_id){
+		$this->db->select('*');
+         $this->db->from('photos');
+         $this->db->where('movie_or_actor_id',$m_id);
+         $this->db->where('status','0');
+	$this->db->where('type','1');
+            return $this->db->get();
+
+	}
+	function insert_movie_review($data){
+	
+		
+		return $res=$this->db->insert('comments',$data);
+	
+		
+		
+	}
+	function get_movie_reviews($m_id){
+	
+		
+		$this->db->select('rating,title,comment,comment_id,user.user_name,dated');
+		$this->db->from('comments');
+		$this->db->join('user','user.user_id=comments.user_id','left');
+		$this->db->where('to_id',$m_id);
+		$this->db->where('comments.status',0);
+		$this->db->order_by('comment_id','desc');
+		$query=$this->db->get();
+		return $query;
+	
+		
+		
+	}
+	function get_movies_list_main($current_page='0',$post_per_page=''){
+			$offset=($current_page-1)*$post_per_page;
+		if($current_page==1) {
+			$offset = 0;
+		}
+					
+					$this->db->select('*');
+               $this->db->from('movies');
+               $this->db->where('movie_status','0');
+             
+               $this->db->order_by('movie_date','asc');
+             	if($post_per_page!='')
+               $this->db->limit($post_per_page,$offset);
+               return $this->db->get(); 
+             
+             
+        }
+        
+        function get_cast_list_main($current_page='0',$post_per_page=''){
+			$offset=($current_page-1)*$post_per_page;
+		if($current_page==1) {
+			$offset = 0;
+		}
+					
+					$this->db->select('*');
+               $this->db->from('actors');
+               $this->db->where('actor_status','0');
+             
+              
+             	if($post_per_page!='')
+               $this->db->limit($post_per_page,$offset);
+               return $this->db->get(); 
+             
+             
+        }
+        function get_casts_count(){
+     					$this->db->select('count(actor_id) as count');
+                 $this->db->from('actors');
+                 $this->db->where('actor_status','0');
+                
+                 $query=$this->db->get();
+                foreach($query->result_array() as $row)
+                return $row['count'];
+     	
+     	}   
      
 }

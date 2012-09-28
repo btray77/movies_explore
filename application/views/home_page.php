@@ -19,9 +19,13 @@ if ($result && ($type == 'actor')) {
         $movie_desc = $row['actor_desc'];
     }
 }
+
+
+
+
 ?>  
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
         <title><?php echo $movie_name; ?></title>
@@ -31,6 +35,9 @@ if ($result && ($type == 'actor')) {
         <script type="text/javascript" language="javascript" src="<?php echo base_url(); ?>js/jquery.carouFredSel-5.6.1.js"></script>
  <script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.lightbox-0.5.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/jquery.lightbox-0.5.css" media="screen" />
+
+
+
 <script type="text/javascript">
     $(function() {
         $('#gallery a').lightBox();
@@ -55,6 +62,15 @@ if ($result && ($type == 'actor')) {
 		color: #fff;
 	}
 	#gallery ul a:hover { color: #fff; }*/
+	.list_carousel a{
+	display:block;
+	float:left;
+
+	}
+	.pagination a{
+		float:none;
+		display:inline-block;
+	}
 	</style>
         <script type="text/javascript" language="javascript">
             $(function() {
@@ -123,6 +139,7 @@ if ($result && ($type == 'actor')) {
                     infinite: false,
                     auto    : false,
                     width   :500,
+					
                     scroll  : {
                         items   : "page"
                     },
@@ -134,7 +151,8 @@ if ($result && ($type == 'actor')) {
                         button  : "#foo2_next",
                         key     : "right"
                     },
-                    pagination  : "#foo2_pag"
+                    pagination  : "#foo2_pag",
+					 
                 });
 
             });
@@ -144,11 +162,14 @@ if ($result && ($type == 'actor')) {
         <?php
         include_once(APPPATH . 'js/home_js.php');
         ?>  
-
-        <header>
-        </header>
-
+	<div style="width:100%" class='outer_container'>
+         <?php
+        include_once(APPPATH . 'views/header_view.php');
+        ?> 
+	
         <aside id="rightbar">
+		<h2 class="section-header section-header-short">Latest</h2>
+	
             <div id="side_ul_con">
                 loading
             </div>
@@ -159,7 +180,7 @@ if ($result && ($type == 'actor')) {
                 <div class="main_inside">
                     <h1><?php echo $movie_name; ?></h1>
                     <section class="metadata">
-                        <div class="poster-area"><img alt="poster" src="<?php echo $movie_photo; ?>" class="poster"></div>
+                        <div class="poster-area"><img alt="poster" src="<?php echo base_url().'m_images/'.$movie_photo ;?>" class="poster"></div>
                         <div class="summary">
 
 
@@ -170,11 +191,23 @@ if ($result && ($type == 'actor')) {
 <div><span class="viewer">Audience:</span><span class="meter wts">95</span><span class="rating-count">(176,613 ratings)</span></div>-->
                             </div>
                             <div class="actions">
-                                <div component="MovieTrailer" class="action-button" id="">
+                               <!-- <div component="MovieTrailer" class="action-button" id="">
 
                                     <a videosource="http://www.videodetective.net/player.aspx?PublishedId=393632&amp;CustomerId=300120&amp;e=1337775714544&amp;cmd=6&amp;fmt=4&amp;VideoKbrate=750&amp;sub=mobile-iPad&amp;h=4cfbcf74f60833b2557581785f3ef5b7" class="trailer-icon">Play Trailer</a>
                                 </div>
-                                <div movieid="771041419" component="ShowtimesLink" class="action-button"><a class="showtimes-icon">Showtimes</a></div>
+                                <div movieid="771041419" component="ShowtimesLink" class="action-button"><a class="showtimes-icon">Showtimes</a></div> -->
+				<div class="nav mainnavs">
+                    <ul>
+                        <li class="youarehere"><a href="#" id="overview" class="bar_menu">Over view</a></li>
+                        <li><a href="#" id="about" class="bar_menu">About</a></li>
+                        <li><a href="#" id="media" class="bar_menu">Media</a></li>
+                        <li><a href="#" id="review" class="bar_menu">Review</a></li>
+                        
+                    </ul>
+                </div>
+		
+
+
                             </div>
                             <ul class="movie-info">
                                 <li>PG-13, 1 hr. 45 min.</li>
@@ -190,13 +223,12 @@ if ($result && ($type == 'actor')) {
                     </section>
 
 
-
-
-
+<div id="gallery_media" >
+<?php if($mp_gallery->num_rows() > 0) { ?>
                     <section class="pictures">
                         <div component="PhotoBrowser" class="box" id="">
 
-                            <div class="photo-overview">46 Photos for Men in Black III</div>
+                            <div class="photo-overview">46 Photos for <?php echo $movie_name; ?></div>
                             <div class="photo-container">
 
                                 <div class="photo-carousel"><div class="photo-slide" style="left: -2640px;">
@@ -204,45 +236,16 @@ if ($result && ($type == 'actor')) {
                                         <div class="list_carousel" id="gallery">
 
                                             <div id="foo5" >
- <a href="http://content9.flixster.com/rtmovie/89/61/89615_gal.jpg" title="Utilize a flexibilidade dos seletores da jQuery e crie um grupo de imagens como desejar. $('#gallery').lightBox();">
-                                                <img alt="Men in Black III (1 of 46)" _height="399" _width="600" _src="http://content9.flixster.com/rtmovie/89/61/89615_gal.jpg" tag="/movie/photo/89615" src="http://content9.flixster.com/rtmovie/89/61/89615_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89615">
+
+
+<?php foreach($mp_gallery->result_array() as $g_row){ ?>
+ <a href="<?php echo base_url().'m_images/'.$g_row['photo_name'] ;?>" title="">
+                                                <img alt=""  tag="" src="<?php echo base_url().'m_images/'.$g_row['photo_name'] ;?>" class="thumbnail" component="PopupPhoto" id="<?php $g_row['photo_name'] ;?>">
 </a>
-
-    <a href="http://content8.flixster.com/rtmovie/89/61/89614_gal.jpg" title="">                                                <img alt="Men in Black III (2 of 46)" _height="399" _width="600" _src="http://content8.flixster.com/rtmovie/89/61/89614_gal.jpg" tag="/movie/photo/89614" src="http://content8.flixster.com/rtmovie/89/61/89614_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89614">
-</a>
-<a href="http://content9.flixster.com/rtmovie/89/61/89615_gal.jpg" title="Utilize a flexibilidade dos seletores da jQuery e crie um grupo de imagens como desejar. $('#gallery').lightBox();">
-                                                <img alt="Men in Black III (1 of 46)" _height="399" _width="600" _src="http://content9.flixster.com/rtmovie/89/61/89615_gal.jpg" tag="/movie/photo/89615" src="http://content9.flixster.com/rtmovie/89/61/89615_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89615">
-</a>
-
-    <a href="http://content8.flixster.com/rtmovie/89/61/89614_gal.jpg" title="">                                                <img alt="Men in Black III (2 of 46)" _height="399" _width="600" _src="http://content8.flixster.com/rtmovie/89/61/89614_gal.jpg" tag="/movie/photo/89614" src="http://content8.flixster.com/rtmovie/89/61/89614_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89614">
-</a>
-                                                        <img alt="Men in Black III (3 of 46)" _height="399" _width="600" _src="http://content7.flixster.com/rtmovie/89/61/89613_ga.jpg" tag="/movie/photo/89613" src="http://content7.flixster.com/rtmovie/89/61/89613_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89613">
-
-
-                                                            <img alt="Men in Black III (4 of 46)" _height="399" _width="600" _src="http://content6.flixster.com/rtmovie/89/61/89612_gal.jpg" tag="/movie/photo/89612" src="http://content6.flixster.com/rtmovie/89/61/89612_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89612">
-
-
-                                                                <img alt="Men in Black III (5 of 46)" _height="399" _width="600" _src="http://content9.flixster.com/rtmovie/89/61/89611_gal.jpg" tag="/movie/photo/89611" src="http://content9.flixster.com/rtmovie/89/61/89611_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89611">
-
-
-                                                                    <img alt="Men in Black III (6 of 46)" _height="399" _width="600" _src="http://content8.flixster.com/rtmovie/89/61/89610_gal.jpg" tag="/movie/photo/89610" src="http://content8.flixster.com/rtmovie/89/61/89610_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89610">
-
-                                                                        <img alt="Men in Black III (1 of 46)" _height="399" _width="600" _src="http://content9.flixster.com/rtmovie/89/61/89615_gal.jpg" tag="/movie/photo/89615" src="http://content9.flixster.com/rtmovie/89/61/89615_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89615">
-
-
-                                                                            <img alt="Men in Black III (2 of 46)" _height="399" _width="600" _src="http://content8.flixster.com/rtmovie/89/61/89614_gal.jpg" tag="/movie/photo/89614" src="http://content8.flixster.com/rtmovie/89/61/89614_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89614">
-
-
-                                                                                <img alt="Men in Black III (3 of 46)" _height="399" _width="600" _src="http://content7.flixster.com/rtmovie/89/61/89613_gal.jpg" tag="/movie/photo/89613" src="http://content7.flixster.com/rtmovie/89/61/89613_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89613">
-
-
-                                                                                    <img alt="Men in Black III (4 of 46)" _height="399" _width="600" _src="http://content6.flixster.com/rtmovie/89/61/89612_gal.jpg" tag="/movie/photo/89612" src="http://content6.flixster.com/rtmovie/89/61/89612_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89612">
-
-
-                                                                                        <img alt="Men in Black III (5 of 46)" _height="399" _width="600" _src="http://content9.flixster.com/rtmovie/89/61/89611_gal.jpg" tag="/movie/photo/89611" src="http://content9.flixster.com/rtmovie/89/61/89611_tmb.jpg" class="thumbnail" component="PopupPhoto" id="thumb_89611">
-
-
-                                                                                            
+  
+	
+	<?php } ?>
+                                                             
 
                                                                                                 </div>
 
@@ -260,8 +263,14 @@ if ($result && ($type == 'actor')) {
                                                                                                 </div>
 
                                                                                                 </section>
+<?php } ?>
+</div>
 
 
+
+<div id="doverview" class="cont_menu_area">
+
+		
                                                                                                 <section class="movie-people">
                                                                                                     <?php if ($directors_array->num_rows() > 0) { ?>
                                                                                                         <h2>Director</h2>
@@ -269,10 +278,11 @@ if ($result && ($type == 'actor')) {
 
 
                                                                                                             <?php foreach ($directors_array->result_array() as $row) { ?> 
+																												<?php $c_photo=($row['actor_thumb_photo']) ? 'thumb_images/'.$row['actor_thumb_photo']:'images/default_profile.jpg';?>
                                                                                                                 <a href="<?php echo site_url('actor?a_id=' . $row['actor_id']); ?>"><li class="box clickable" component="PageLink">
 
                                                                                                                         <?php $img_url = $row["actor_photo"]; ?>
-                                                                                                                        <img src="<?php echo base_url(); ?>js/timthumb.php?src=<?php echo $row['actor_photo']?>&w=50&h=50&zc=0" class="thumbnail person-thumbnail" />
+                                                                                                                        <img src="<?php echo base_url().$c_photo; ?>" class="thumbnail person-thumbnail" />
                                                                                                                         <div class="role"><span class="person-name"><?php echo $row['actor_name']; ?></span></div>
                                                                                                                     </li></a>
                                                                                                             <?php } ?>
@@ -300,24 +310,48 @@ if ($result && ($type == 'actor')) {
                                                                                                             <div class="write-review-section write-review-rating">
                                                                                                                 <span class="write-review-field-name">Rating:</span>
                                                                                                                 <div class="write-review-star-rating goog-inline-block">
-                                                                                                                    <div data-rating="1" tabindex="0" class="star write-review-star goog-inline-block SPRITE_star_on_dark">&nbsp;</div>
-                                                                                                                    <div data-rating="2" tabindex="0" class="star write-review-star goog-inline-block SPRITE_star_off_dark">&nbsp;</div>
-                                                                                                                    <div data-rating="3" tabindex="0" class="star write-review-star goog-inline-block SPRITE_star_off_dark">&nbsp;</div>
-                                                                                                                    <div data-rating="4" tabindex="0" class="star write-review-star goog-inline-block SPRITE_star_off_dark">&nbsp;</div>
-                                                                                                                    <div data-rating="5" tabindex="0" class="star write-review-star goog-inline-block SPRITE_star_off_dark">&nbsp;</div>
+                                                                                                                    <div id="rate_1" onclick="select_rating(this);return false;" tabindex="0" class="star write-review-star goog-inline-block rate_on">&nbsp;</div>
+                                                                                                                    <div id="rate_2" onclick="select_rating(this);return false;" tabindex="0" class="star write-review-star goog-inline-block rate_off">&nbsp;</div>
+                                                                                                                    <div id="rate_3" onclick="select_rating(this);return false;" tabindex="0" class="star write-review-star goog-inline-block rate_off">&nbsp;</div>
+                                                                                                                    <div id="rate_4" onclick="select_rating(this);return false;" tabindex="0" class="star write-review-star goog-inline-block rate_off">&nbsp;</div>
+                                                                                                                    <div id="rate_5" onclick="select_rating(this);return false;" tabindex="0" class="star write-review-star goog-inline-block rate_off">&nbsp;</div>
+
+
 
                                                                                                                 </div></div><div class="write-review-section">
-                                                                                                                <span class="write-review-field-name">Title:</span><input type="text" value="" class="form-text-box write-review-title" size="50" maxlength="50">
+<input type="hidden" value='1' id="m_rating"/>
+																												<input type="hidden" id="r_user" value="<?php echo $user_type; ?>" />
+																												<input type="hidden" id="r_movie_id" value="<?php echo $movie_id; ?>" />
+                                                                                                                <span class="write-review-field-name">Title:</span><input type="text" id="re_title" value="" class="form-text-box write-review-title" size="50" maxlength="50">
                                                                                                                     <span class="write-review-remaining">
                                                                                                                         <span class="write-review-title-remaining">50</span> remaining</span>
                                                                                                             </div><div class="write-review-section">
                                                                                                                 <span class="write-review-field-name">Comment:</span><div>
-                                                                                                                    <textarea class="form-text-box write-review-comment" maxlength="1200">
+                                                                                                                    <textarea class="form-text-box write-review-comment" id="re_comment" maxlength="1200">
 
                                                                                                                     </textarea><div class="write-review-comment-remaining-num"><span class="write-review-comment-remaining">1200</span> remaining</div></div></div>
-                                                                                                            <div class="write-review-section"><input type="button" class="button org_button" value="Submit Review" tabindex="0" class="write-review-submit"></div></div>
+                                                                                                            <div class="write-review-section"><input type="button" class="button org_button" onclick="review_submit()" value="Submit Review" tabindex="0" class="write-review-submit"></div></div>
                                                                                                     </div>
                                                                                                     </session>
+<session id="movie_review_list">
+<?php
+                                                                                                            include_once(APPPATH . 'views/ajax_movie_review_view.php');
+                                                                                                            ?>  
+</session>
+
+
+</div><!--over view end-->
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -329,6 +363,36 @@ if ($result && ($type == 'actor')) {
                                                                                                     <div id="extra"></div>
 
 
-                                                                                                    </body>
+<div class="overlay" id="overlayid" style="display:none"> 
+	<div class="pop_outer">
+		<div class="pop_header">
+			<span class="pop_title" id="">Log In</span>
+			<a href="#" class="pop_close" role="">
+			<span class="pop_close_icon"></span></a>
+		</div>
+		<div class="pop_form">
+			
+<?php
+        include_once(APPPATH . 'views/signin_view.php');
+        ?>  
+<?php
+        include_once(APPPATH . 'views/signup_view.php');
+        ?>  
+
+
+
+		</div>
+		<div class="clear">
+
+		</div>
+	</div>
+</div>
+</div>  
+<?php
+        include_once(APPPATH . 'views/footer_view.php');
+        ?> 
+
+</div><!-- outer container end --> 
+</body>
                                                                                                     </html>
 

@@ -11,7 +11,7 @@ foreach($result->result_array() as $row){
 <div class="main_inside">
 		<h1><?php echo $movie_name; ?></h1>
 		<section class="metadata">
-  <div class="poster-area"><img alt="poster" src="<?php echo $movie_photo;?>" class="poster"></div>
+  <div class="poster-area"><img alt="poster" src="<?php echo base_url().'m_images/'.$movie_photo ;?>" class="poster"></div>
   <div class="summary">
   
   
@@ -26,10 +26,10 @@ foreach($result->result_array() as $row){
   	</div>
   	<div movieid="771041419" component="ShowtimesLink" class="action-button"><a class="showtimes-icon">Showtimes</a></div>
   </div>
-  <ul class="movie-info">
+ <!-- <ul class="movie-info">
     <li>PG-13, 1 hr. 45 min.</li>
     <li>Release Date: <time datetime="2012-05-25 00:00:00.0">May 25, 2012</time></li>
-  </ul>
+  </ul> -->
   <p component="ShowMoreText" class="synopsis" id="">
   	
   	<span class="blurb"><?php echo substr_replace($movie_desc, '...', 300); ?></span>
@@ -47,7 +47,7 @@ foreach($result->result_array() as $row){
       
      <?php foreach($actor_movies->result_array() as $row){?> 
      <a href="<?php echo site_url('movie?m_id='.$row['movie_id']); ?>"><li class="box clickable" component="PageLink">
-      <img alt="director-thumbnail" src="<?php echo $row['movie_photo'];?>" class="thumbnail person-thumbnail">
+      <img alt="director-thumbnail" src="<?php echo base_url().'m_images/'.$row['movie_photo'];?>" class="thumbnail person-thumbnail">
       <div class="role"><span class="person-name"><?php echo $row['movie_name'];?></span></div>
     </li></a>
       <?php } ?>
@@ -63,7 +63,7 @@ foreach($result->result_array() as $row){
       
      <?php foreach($dire_movies->result_array() as $rowd){?> 
    <a href="<?php echo site_url('movie?m_id='.$rowd['movie_id']); ?>"> <li  class="box clickable" component="PageLink">
-      <img alt="director-thumbnail" src="<?php echo $rowd['movie_photo'];?>" class="thumbnail person-thumbnail">
+      <img alt="director-thumbnail" src="<?php echo base_url().'m_images/'.$rowd['movie_photo'];?>" class="thumbnail person-thumbnail">
       <div class="role"><span class="person-name"><?php echo $rowd['movie_name'];?></span></div>
     </li></a>
       <?php } ?>

@@ -1,0 +1,74 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
+class Ajax extends CI_Controller {
+
+	/**
+	 * Index Page for this controller.
+	 *
+	
+	 */
+         public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('movie_model');
+		//$this->check_autologin();
+		
+	}
+	public function index()
+	{
+			$data['movie_list']=$this->movie_model->get_movies_list_main();
+         $this->load->view('ajax_movies_list_view',$data);
+		
+		
+		}
+		
+		function ajax_load_movies_list(){
+			
+					$post_per_page=4;
+		$data['current_page']=1;
+		
+	$post_page=$this->input->post('current_page');
+		$data['total_rows']=$this->movie_model->get_movies_count();
+		
+		
+		$data['totalpages']=ceil($data['total_rows']/$post_per_page);
+		if(!empty($post_page)) {
+			$data['current_page']=intval(trim($post_page));
+				}
+				
+		
+
+					
+			
+					$data['movie_list']=$this->movie_model->get_movies_list_main($data['current_page'],$post_per_page);
+				
+         		$this->load->view('ajax_movie_list_view',$data);
+			
+			}
+			
+	function ajax_load_casts_list(){
+			
+					$post_per_page=4;
+		$data['current_page']=1;
+		
+	$post_page=$this->input->post('current_page');
+		$data['total_rows']=$this->movie_model->get_casts_count();
+		
+		
+		$data['totalpages']=ceil($data['total_rows']/$post_per_page);
+		if(!empty($post_page)) {
+			$data['current_page']=intval(trim($post_page));
+				}
+				
+		
+
+					
+			
+					$data['movie_list']=$this->movie_model->get_cast_list_main($data['current_page'],$post_per_page);
+				
+         		$this->load->view('ajax_cast_list_view',$data);
+			
+			}			
+			
+		
+}

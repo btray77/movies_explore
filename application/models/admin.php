@@ -101,6 +101,26 @@ class Admin extends CI_Model {
 		$this->db->where('actor_id',$id);
 		return $this->db->get();
 	}
-
+	
+	function insert_movie_photo_details($d_array){
+		return $this->db->insert('photos',$d_array);
+		
+	}
+	function update_actor_photo($adata,$actor_id){
+	$this->db->where('actor_id',$actor_id);
+	return $this->db->update('actors',$adata);
+	
+	}
+	function update_movie_photo($adata,$movie_id){
+	$this->db->where('movie_id',$movie_id);
+	return $this->db->update('movies',$adata);
+	
+	}
+	function get_actor_detail($id){
+		$this->db->select('*');
+		$this->db->from('actors');
+		$this->db->where('actor_id',$id);
+		return $this->db->get();
+	}
 	
 }

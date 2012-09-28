@@ -21,6 +21,7 @@ class Movie extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('movie_model');
+		$this->check_autologin();
 		
 	}
 	public function index()
@@ -31,11 +32,38 @@ class Movie extends CI_Controller {
                    $data['type']='movie';
                 $key=$data['movie_id'];
              $data['cast_array']=$this->movie_model->get_actors_details($key,'3');
+		$data['mp_gallery']=$this->movie_model->get_movie_photo_gallery($key);
              $data['directors_array']=$this->movie_model->get_directors_details($key);
+             $data['review_array']=$this->movie_model->get_movie_reviews($key);
             $data['result']=$this->movie_model->get_movie_details($key);
+            $data['user_type']=($this->session->userdata('user_type'))? $this->session->userdata('user_type') : '1';
                 
 		 $data['actor_id']='0';
 		$this->load->view('home_page',$data);
+	}
+	function check_autologin(){
+	if (isset($_COOKIE['autologin'])) {
+
+	$this->load->model('login_model');
+	$result=$this->login_model->check_autologin($_COOKIE['autologin']);
+
+        if ($_COOKIE['autologin'] == $result['session_key']) {
+
+           		$user_data = array(
+						'user_id' => $result['user_id'],
+						'user_name' => $result['user_name'],
+						'user_type' =>$result['user_type'],
+						'is_logged_in' =>'1'
+						
+				);		
+		//session create
+		$this->session->set_userdata($user_data);
+                   	
+        }
+    }
+
+
+
 	}
         function get_all_actors(){
             $key=$this->input->post('m_id');
@@ -77,6 +105,40 @@ class Movie extends CI_Controller {
             
             
         }
-        
+        function insert_movie_review(){
+				
+				$m_id=$this->input->post('m_id');
+				$title=$this->input->post('title');
+				$review=$this->input->post('r_review');
+				$comment=$this->input->post('comment');
+			 $user_type=$this->input->post('user_type');
+				if($user_type==1){
+					echo $user_id=$this->session->userdata('user_id');
+					}
+					else{
+						$user_id=0;
+						}
+				$data=array(
+							'to_id'=>$m_id,
+							'to_type'=>1,//for movie 1 and cast 2
+							'title'=>$title,
+							'rating'=>$review,
+							'comment'=>$comment,
+							'dated' =>date('Y-m-d H:m:s'),
+							'user_id'=>$user_id
+								
+							);
+                
+                
+            $result=$this->movie_model->insert_movie_review($data);
+            echo $result;
+            
+            
+        }
+        function ajax_get_movies_review(){
+        			$m_id=$this->input->post('m_id');
+        			 $data['review_array']=$this->movie_model->get_movie_reviews($m_id);
+        			 $this->load->view('ajax_movie_review_view',$data);
+        	}
            
 }

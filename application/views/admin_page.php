@@ -7,7 +7,7 @@
 </head>
 <body>
  <?php
-  include_once(APPPATH . 'js/admin.php'); 
+  include_once(APPPATH . 'js/admin_js.php'); 
   
 ?>  
 <div class="wrapper">
@@ -19,7 +19,7 @@
             </li>-->
            <?php foreach($result->result_array() as $row){?> 
            <li class="sidebar-list-item" id="list_aside<?php echo $row['movie_id'];?>">
-		<img src="<?php echo base_url(); ?>js/timthumb.php?src=<?php echo $row['movie_photo'];?>&w=54&h=81&zc=0"  />
+		<img src="<?php echo base_url(); ?>js/timthumb.php?src=<?php echo base_url().'m_images/'.$row['movie_photo'];?>&w=54&h=81&zc=0"  />
                 <input type="text" value="<?php echo $row['movie_photo'];?>" id="tb_movie_photo"/>
                
                 
@@ -27,8 +27,20 @@
 		<p>caste,caste,caste</p>
                 <input type="button" onclick="delete_movie(<?php  echo $row['movie_id']; ?>)" id="<?php echo 'trash_button'.$row['movie_id'];?>" value="<?php echo ($row['movie_status']==1) ? 'InActive' : 'Active'; ?>"/>
 		 <input type="button" onclick="update_movie(<?php  echo $row['movie_id']; ?>)" id="<?php echo 'bt_movie_update'.$row['movie_id'];?>" value="update"/>
+
+
+		 <form name="up_photo<?php echo $row['movie_id']; ?>" enctype="multipart/form-data" action="<?php echo site_url('radmin/upload_movies_photo');?>" method="post">
+		<input type="hidden" id="h_movie_id" name="h_movie_id" value="<?php echo $row['movie_id']; ?>" />
+<select name="photo_type" id="photo_type">
+<option value="0">gallery image</option>
+<option value="1">featured image</option>
+
+
+</select>
+		 <input type="file" name="f_upload_photo<?php echo $row['movie_id']; ?>" id="<?php echo 'f_upload_photo'.$row['movie_id'];?>" class="file_upload_input">
                  <input type="button" onclick="upload_photo(<?php  echo $row['movie_id']; ?>)" id="<?php echo 'bt_photo_upload'.$row['movie_id'];?>" value="upload photo"/>
 	</li>
+</form>
            <hr></hr>
 	<?php } ?>
 	</ul>

@@ -12,7 +12,7 @@ float:right;
 </head>
 <body>
  <?php
-  include_once(APPPATH . 'js/admin.php'); 
+  include_once(APPPATH . 'js/admin_js.php'); 
   
 ?>  
 <div class="wrapper">
@@ -24,15 +24,32 @@ float:right;
             </li>-->
            <?php foreach($result->result_array() as $row){?> 
            <li class="sidebar-list-item" id="list_aside<?php echo $row['actor_id'];?>">
-		<img src="<?php echo base_url(); ?>js/timthumb.php?src=<?php echo $row['actor_photo'];?>&w=54&h=81&zc=0"  />
+		<img src="<?php echo base_url(); ?>js/timthumb.php?src=<?php echo base_url().'m_images/'.$row['actor_photo'];?>&w=54&h=81&zc=0"  />
                 <input type="text" value="<?php echo $row['actor_photo'];?>" id="tb_actor_photo<?php  echo $row['actor_id']; ?>"/>
                
                 
 		<h3><?php echo $row['actor_name'];?></h3>
 		<input type="text" value="<?php echo $row['actor_name'];?>" id="tb_actor_name<?php  echo $row['actor_id']; ?>"/>
 		<textarea  rows="10" cols="40" id="txt_actor_desc<?php echo $row['actor_id'];?>"><?php  echo $row['actor_desc']; ?></textarea>
-                <input type="button" onclick="delete_actor(<?php  echo $row['actor_id']; ?>)" id="<?php echo 'trash_button_actor'.$row['actor_id'];?>" value="<?php echo ($row['actor_status']==1) ? 'InActive' : 'Active'; ?>"/>
+                 
+				 
+	<form name="up_photo<?php echo $row['actor_id']; ?>" enctype="multipart/form-data" action="<?php echo site_url('radmin/upload_actor_photo');?>" method="post">
+		<input type="hidden" id="h_actor_id" name="h_actor_id" value="<?php echo $row['actor_id']; ?>" />
+<select name="photo_type" id="photo_type">
+<option value="0">gallery image</option>
+<option value="1">featured image</option>
+<option value="2">thumb image</option>
+
+
+</select>
+		 <input type="file" name="f_upload_photo<?php echo $row['actor_id']; ?>" id="<?php echo 'f_upload_photo'.$row['actor_id'];?>" class="file_upload_input">
+                 <input type="button" onclick="upload_photo_actor(<?php  echo $row['actor_id']; ?>)" id="<?php echo 'bt_photo_upload'.$row['actor_id'];?>" value="upload photo"/>
+	</li>
+</form>
+				
+				<input type="button" onclick="delete_actor(<?php  echo $row['actor_id']; ?>)" id="<?php echo 'trash_button_actor'.$row['actor_id'];?>" value="<?php echo ($row['actor_status']==1) ? 'InActive' : 'Active'; ?>"/>
 		 <input type="button" onclick="update_actor(<?php  echo $row['actor_id']; ?>)" id="<?php echo 'bt_movie_update'.$row['actor_id'];?>" value="update"/>
+<a href="<?php echo site_url('radmin/getactor').'/'.$row['actor_id'];?>">more</a>
 	</li>
            <hr></hr>
 	<?php } ?>
